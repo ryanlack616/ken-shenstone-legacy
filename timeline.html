@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline — Ken Shenstone Legacy</title>
+<meta name="description" content="A decade of posts from the Ken Shenstone Ceramic Studio & Albion Anagama Facebook page — kiln firings, pottery sales, community events, and studio life.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Timeline-specific styles */
+.timeline-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.timeline-stats .stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.timeline-stats .stat-number {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--ember);
+  font-weight: bold;
+}
+.timeline-stats .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.filter-bar button {
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.filter-bar button:hover,
+.filter-bar button.active {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+
+.era-section {
+  margin: 2.5rem 0;
+}
+.era-header {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--teal);
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 60px;
+  background: var(--bg);
+  z-index: 5;
+  padding-top: 0.5rem;
+}
+.era-header .count {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-family: var(--sans);
+  font-weight: normal;
+}
+
+.post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+.post-card:hover {
+  border-color: var(--teal-light);
+}
+.post-card.has-sale {
+  border-left: 3px solid var(--ember);
+}
+.post-card.has-kiln {
+  border-left: 3px solid var(--teal);
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.post-date {
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.post-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.post-text.truncated {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.post-text.truncated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, var(--bg-card));
+}
+
+.post-expand {
+  background: none;
+  border: none;
+  color: var(--teal);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+  font-family: var(--sans);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  margin-right: 0.25rem;
+  background: var(--bg-warm);
+  color: var(--text-light);
+  border: 1px solid var(--border);
+}
+.tag-kiln { background: #fef3ec; color: #c4784a; border-color: #e8c4a8; }
+.tag-pottery { background: #f0f5f4; color: #5a7f7b; border-color: #a8c8c4; }
+.tag-sale { background: #fdf8ec; color: #b8860b; border-color: #dcc878; }
+.tag-event { background: #f5f0fa; color: #7b5ea7; border-color: #c4b0d8; }
+.tag-wood { background: #f5f2ec; color: #8b6914; border-color: #c8b078; }
+
+.post-images {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.post-images img {
+  max-height: 150px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.post-indicators {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.indicator {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: var(--bg-warm);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.source-note {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--bg-warm);
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .era-header {
+    font-size: 1.2rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="site-nav">
+  <div class="logo">Ken Shenstone <span class="accent">Legacy</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="kiln.html">The Kiln</a>
+    <a href="work.html">Work</a>
+    <a href="studio.html">Studio Life</a>
+    <a href="timeline.html" class="active">Timeline</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="content">
+  <h1 class="page-title">Facebook Timeline</h1>
+  <p class="intro">
+    Over a decade of posts from the <strong>Ken Shenstone Ceramic Studio & Albion Anagama</strong>
+    Facebook page — kiln firings, pottery sales, community gatherings, and daily life at the studio.
+    Extracted from full-page screenshots, preserving the chronological record.
+  </p>
+
+  <div class="timeline-stats">
+    <div class="stat">
+      <div class="stat-number">173</div>
+      <div class="stat-label">Posts</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">119</div>
+      <div class="stat-label">With Photos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">47</div>
+      <div class="stat-label">Kiln / Firing</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">18</div>
+      <div class="stat-label">Sales / Events</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <span style="color: var(--text-dim); font-size: 0.85rem; margin-right: 0.5rem; align-self: center;">Filter:</span>
+    <button class="active" onclick="filterPosts('all')">All</button>
+    <button onclick="filterPosts('kiln')">🔥 Kiln</button>
+    <button onclick="filterPosts('pottery')">🏺 Pottery</button>
+    <button onclick="filterPosts('sale')">💰 Sales</button>
+    <button onclick="filterPosts('event')">🎪 Events</button>
+    <button onclick="filterPosts('has-text')">📝 With Text</button>
+    <button onclick="filterPosts('has-image')">📷 With Photos</button>
+  </div>
+
+
+  <section class="era-section" data-era="2019-2020">
+    <h2 class="era-header">Recent (2019–2020) <span class="count">(20 posts)</span></h2>
+
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">February 26, 2020</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-d2d51a95e326">Ken Shenstone Ceramic Studio &amp; Albion Anagama 798 followers 22 following The largest anagama kiln in North America resides quietly in Albion, Michigan. Art Gallery
+Message
+Follow
+Search</div>
+      <div class="post-images">
+        <img src="extracted/images/img_bfc915e50ffe.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">February 26, 2020</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-48239959c92e">s 100% recommend Reviews)
+Ken Shenstone Ceramic Studio &amp; Albion Anagama updated their status February 26, 2020</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 06, 2019</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-ccdd4cd8615a">Links
+Like
+Comment
+Share
+kshenstone.com
+Write comment .
+Contact info</div>
+      <div class="post-images">
+        <img src="extracted/images/img_3d10c3ff93e1.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 02, 2019</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-2c79b6e5e430">Photos
+See all photos
+Mon; May 2019 Mother&#x27;s Day Sale Albion; MI people interested
+Interested
+comment
+Like
+Comment
+Share
+Sheryl Fischer Jacobs Ken Shenstone Ceramic Studio &amp; Albion Anagama will you be open today or tomorrow?
+Privacy Consumer Health Privacy Terms Advertising Ad Choices More
+Cookies</div>
+      <div class="post-images">
+        <img src="extracted/images/img_b57f8dfb2df0.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_b3133b4fe511.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 01, 2019</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-08bff20c851f">0.00 104
+comments 3 shares 521 views</div>
+      <div class="post-images">
+        <img src="extracted/images/img_1057a0925836.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_001.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-0000eb9738db">Meredith Russell Fay Is this still an active site? Did you fire the kiln in 20247 Like Reply</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_001.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-67f6a041b545">Karen Baker Ken are you no longer firing the kiln that was up towards the house? Is this the new kiln?</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_001.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-64093259f55a">Ken Shenstone Ceramic Studio &amp; Albion Anagama Karen Baker haven&#x27;t fired in few years Finish this new kiln last spring: This is third firing. Not to say we won&#x27;t fire the b_.See more</div>
+      <div class="post-indicators">
+        <span class="indicator">📄 Truncated (See more)</span>
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_002.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-b84a4c87144d">Sheryl Fischer Jacobs Samantha Burnham Symonds yesl
+Like Reply</div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_003.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-6f4acd0843a0">Jill Cline Exciting__reminds me of finding archaeological treasure: Like Reply</div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_005.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-1b0096dd8178">Bill Dobbins Karen and really enjoyed stopping in on Saturday night: Thanks for spending some time with us and explaining many of the det . See more</div>
+      <div class="post-indicators">
+        <span class="indicator">📄 Truncated (See more)</span>
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_006.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-a03e06da6220">Irma Schatz Merrild Roge ers You are missing out if you don&#x27;t check this out: It&#x27;s amazingl
+Like Reply</div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_006.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-e0915484af96">Mary Lapham Dey what an amazing accomplishmentlll! Congrats Like Reply</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_007.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-b3a0093f9293">Dawn Sutton cant wait to see the new and improved anagama
+Like Reply</div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_007.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-8eeb77cfd64f">Jill Cline Such talent and creativity right in our own backyard. Check it out if you have not already done so</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-event="1" data-tag-wood="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_008.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-event">🎪 event</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text truncated" id="text-99abc86e8417">Albion anagama crew coming to eastern market area in Detroit this weekend to share and sell wares from the previous firing There will also be pots out of previous firings of the noborogama and the anagama_ Come say hil Grab some coffee. Check out the record store next store. Support local artisans; Happy holidays</div>
+      <button class="post-expand" onclick="toggleText('99abc86e8417')">Show more</button>
+    </div>
+    <div class="post-card" data-tag-event="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_008.jpg</span>
+        <span><span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text" id="text-7eecb1db5b67">Dawn Morgan Anyone who shops at Eastern Market, make sure you stop by and see the amazing this they have to offerl He&#x27;s an amazing artistll</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_008.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-083028235ffb">Ken Shenstone Ceramic Studio &amp; Albion Anagama We have tours of the studio and of the kilns area: Good people amazing pots and beautiful space</div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_010.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-1c53bfcf15db">Ken Shenstone Ceramic Studio &amp; Albion Anagama The went very well and we are firing at the end of the month and will have another sale in the beginning of August</div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb5_chunk_012.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-0b5594a1b086">0.00 _ 228</div>
+    </div>
+  </section>
+
+  <section class="era-section" data-era="2018-2019">
+    <h2 class="era-header">2018–2019 <span class="count">(12 posts)</span></h2>
+
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb1_chunk_000.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-c0b154a3eb3b">Lauren Longwell wobbly steve willl have breast pleaselll
+Like Reply</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 09, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_2c3a8d63e074.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 08, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_0fe75b6f96b3.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 19, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-44f6a3be4373">+13</div>
+      <div class="post-images">
+        <img src="extracted/images/img_c3ab159ddfca.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 12, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_295933748e41.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_2291598d211d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 07, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_21e8f153d3d2.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 02, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_5e14d347fee2.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_7895c6318b0b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">January 23, 2018</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_27d047f32f2b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb1_chunk_009.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-c62ab875d9b2">Good Morning: Happy Halloween; you want to meet some awesome people and see amazing artists fire huge kiln come visit usl Everyone invited. Can&#x27;t make it tonight? Its okl We will be firing for 8-9 more days.</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb1_chunk_009.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-9c7baf436dc4">Hope to see you soon_ LOVE, Albion Anagama</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb1_chunk_009.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-90775f5f0f02">Ken Shenstone Ceramic Studio &amp; Albion Anagama added 4 new photos in Albion, MI: October 2015</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb1_chunk_013.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-663ec8f25cde">David Nelson Nice Ken Shenstone Ceramic Studio &amp; Albion Anagama Ken Shenstone Ceramic Studio &amp; Albion Anagama</div>
+    </div>
+  </section>
+
+  <section class="era-section" data-era="2016-2018">
+    <h2 class="era-header">2016–2018 <span class="count">(29 posts)</span></h2>
+
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 19, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_e932412e214a.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 18, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_8df2c7b51271.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_3b47561498b7.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 17, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_0af074462c93.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_9e00151d1735.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 07, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_16ab803085b5.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 08, 2017</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-f5cc6c6a1a06">+12</div>
+      <div class="post-images">
+        <img src="extracted/images/img_1ce77142beee.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 27, 2017</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_f0263614bb37.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb2_chunk_005.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-c333da6ef8d4">Anna Keene Can come just to feed the fire?i?W
+IOv Like Reply</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 15, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-69119f068e9e">+16</div>
+      <div class="post-images">
+        <img src="extracted/images/img_b9d58c2abeb9.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 08, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-82d56c4cb194">+6</div>
+      <div class="post-images">
+        <img src="extracted/images/img_b97f7e38f936.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 07, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-84a8401bbd5d">+26</div>
+      <div class="post-images">
+        <img src="extracted/images/img_a4e4fcc59614.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 11, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-82ae20b4c96c">+19</div>
+      <div class="post-images">
+        <img src="extracted/images/img_c9abf5539ff0.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 06, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_a404cf17ddb0.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 17, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-ef73c1b73a6d">0.00 0.06</div>
+      <div class="post-images">
+        <img src="extracted/images/img_aa0b95f0723d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-pottery="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 16, 2016</span>
+        <span><span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-25b6331fe184">X HOLIDAY POTTERY SALE Decembcr I0th and 1Kt6, 2016 Saturday and Sunday JOam opm
+Tratuning AcW (tTunics 6y&quot; on Shenstor Fetn Anttn , Rmci Gray Canni Hnlifiut Mcnry } Monrn Miceucf O5
+Tenshnton Crrmies Stuudo 29005 A(bi0n Rd Ambion, MI49221</div>
+      <div class="post-images">
+        <img src="extracted/images/img_0b2f47c98237.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-pottery="1" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">Dec 10, 2016</span>
+        <span><span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-a51a2d0772a8">Sat; Dec 10, 2016 Holiday Pottery Sale Albion;
+Interested</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 15, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-64afd47f09a1">DocdeC</div>
+      <div class="post-images">
+        <img src="extracted/images/img_b2cab2f2e057.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 14, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_a045fea0a2f5.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb2_chunk_009.jpg</span>
+        <span><span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-7f7e1763b25c">Josh Merchant Dude: miss this sale: Send me pics of things you know may like with pricesl am serious, Make him do it Anne Beyerll will have you ship</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 12, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-536491fb3c15">+5</div>
+      <div class="post-images">
+        <img src="extracted/images/img_e037b15eb222.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 11, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_a3060ffd01cd.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 04, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_841e4218fd81.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_26a7516217ef.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 03, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_d27323c424ea.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_bc2d867284d3.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb2_chunk_011.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-b0ddefdc129d">Ken Shenstone Ceramic Studio &amp; Albion Anagama S40.00 and it could be yours Like Reply</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 02, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_1045800b6b70.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 01, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_1d556c1bbc1a.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_ce483d877722.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 29, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_63aa335c0508.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-event="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb2_chunk_013.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text truncated" id="text-f3c40232f9d3">Happy Halloween: We are having Halloween weekend event here at the studio. We are not firing the Albion Anagama this year; but we are firing the Noborigama beginning the night of Friday the 31st and ending the evening of Sunday the Znd: Pumpkin Carving Friday during the day; costume party Friday and Saturday night along with the musical stylings of John Balticl</div>
+      <button class="post-expand" onclick="toggleText('f3c40232f9d3')">Show more</button>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb2_chunk_013.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-9ccf1cd0185e">Barry Lonik The &quot;legendary&quot; John Baltic:
+Like</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 25, 2016</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_99ecd66381a4.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="era-section" data-era="2013-2015">
+    <h2 class="era-header">2013–2015 <span class="count">(84 posts)</span></h2>
+
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">March 22, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-0ce4ce88c780">15 views</div>
+      <div class="post-images">
+        <img src="extracted/images/img_59220bbe390f.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 25, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_5bb304178855.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">March 21, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_f73a52b52130.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">March 09, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_09976b2cc402.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 06, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_4d2f70207860.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 05, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_ab982cda2a5e.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">August 4 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-d88d02820f3a">Ken Shenstone Ceramic Studio &amp; Albion Anagama added 4 new photos at Ken Shenstone Ceramic Studio &amp; Albion Anagama August 4 2014</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 04, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_010e994a0d6d.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_1b810183d727.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 19, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_322a05d85d36.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 02, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_98920aaec99b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">March 19, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_248d2c625ff6.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 12, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_e12239f8f1cb.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 30, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_46f618619821.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">February 04, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-461fc38dd234">+4</div>
+      <div class="post-images">
+        <img src="extracted/images/img_d5bba6bd785a.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-tag-wood="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 27, 2015</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text truncated" id="text-ee0a65461f56">RESIDENT POSTION AVAILABLE
+Ken Shenstone&#x27;s Wood Fired Ceramic Studio
+Albion Anagama
+Albion Anagama 29005 Albion rd. Albion;, MI 49224
+Contact:
+Ken Shenstone (517) 629-5876
+shenstone61@gmailcom kenshenstone.com
+facebook; Ken Shenstone&#x27;$ Wood Fired Ceramic Studio &amp; Albion Anagama
+Duties:
+Wood preparation Loading and firing kilns Social media General studio maintenance Assistance with on site projects
+Amenities:
+24 hour studio access: including slab roller; multiple wheels, extruder; gas, electric, and wood kilns, clay mixer; Surrounded by nature center and close to the Kalamazoo River Free to make whatever type of work you pleasel
+APPLY IF THESE QUALITIES DESCRIBE YOU:
+Previous Wood Fire Experience Positive Attitude Self Motivated Hard Worker</div>
+      <button class="post-expand" onclick="toggleText('ee0a65461f56')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_be6e8079af4b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 29, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-829633730ecb">POTTSRY SAL: TODAY</div>
+      <div class="post-images">
+        <img src="extracted/images/img_a4966f239a07.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">January 07, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-6411864951a2">comments
+shares</div>
+      <div class="post-images">
+        <img src="extracted/images/img_7dcbc4c6f832.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 27, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text truncated" id="text-ceb5e3bcb5ab">September 2015 Albion Anagama 29005 Albion Rd. Albion, Ml 49224 Enenmaan nana-pirmeoadndeetantaAhdko
+undo
+Mondoy
+Iuaidoy
+Wadnelday
+Tnuaidal
+Ftdd ;
+Fallidal
+Cluoronet Coa
+quam sunm
+Clource Satl s toom 5Topm
+&quot;Clcarance Salc: oder Dioces in ine sludowabe 757. - 303 oll in &amp;det to make room Ict new work trom Ib on Anagamo</div>
+      <button class="post-expand" onclick="toggleText('ceb5e3bcb5ab')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_3e97315ada8a.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-tag-pottery="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 20, 2015</span>
+        <span><span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-0ca43231ad4e">POTTERY SALS TODAY</div>
+      <div class="post-images">
+        <img src="extracted/images/img_629c1ec9d449.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_003.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-2a69143b4b80">Adam Gordon Good luck sounds fun wish was there
+Like</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 21, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_2978499ef76c.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 01, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_e5400e56e41e.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 23, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-fe79a4f83e15">WWWGOFUNDMECOM Albion Anagama October 2015 Ken Shenstone has posted new updatel</div>
+      <div class="post-images">
+        <img src="extracted/images/img_e11ff27a7a73.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 19, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_c32d1bb15aa9.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 31, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_c994a6fb4fb0.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 30, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-aac5f0077671">October 2015 Albion Anagama 29005 Albion Rd_ Albion; Ml 49224
+November 2015 Albion Anagama 29005 Albion Rd: Albion= 49224
+Eluenerul Hmen
+357863
+Ltc Bo5ladln AEln Anozimabrlcastnle</div>
+      <div class="post-images">
+        <img src="extracted/images/img_95ee97ed96bd.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 27, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_333a641c9b81.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 30, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_ba946c5ce8b4.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-sale="1" data-tag-event="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 26, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-sale">💰 sale</span> <span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text truncated" id="text-35032baca09a">Clearance Salel
+We are firing Albion Anagama at the end of October 2015 and need more room in the studio to make new work:
+25% 50% off all work in the studiolle
+September 18th &amp; 19th  Saturday &amp; Sunday 9 OOam 5.00pm
+Weeked of the Festival of the Forks
+Unique: Local: Handcrafted:
+Albion Anagama 29005 Albion Rd. Albion, MI 49224</div>
+      <button class="post-expand" onclick="toggleText('35032baca09a')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_5a9ff5405547.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_004.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-8360a70c9bef">Josh Merchant took classes from Anne this winter: She is great and you will learn tonl Best part__vou will have an absolute blast and See more</div>
+      <div class="post-indicators">
+        <span class="indicator">📄 Truncated (See more)</span>
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 29, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_be6d6284f8c8.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-wood="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 05, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text truncated" id="text-d017ac4bb2e8">&#x27;PACE AVAILBLEI KENSHENSTONE WOOD FAED CE Rie SdIm Ll ueGan
+ALBION ANAGAMA FIRING ALBION ANAGAMA PURCHASING SPAcEIR ALBION , ANAC ANAGAMA FOR OC Jraduuco Aiinn JUnc Wredeniiicly Ailh Lneotelhemkomuotatocn deon FIRING 2015 Ikge 1985 and imme buldang Fdnidrut CEYATcd ATedlEuet Iolcubcieti aamz Ic purira !5 fulcor; 0ilcca lumbcr etobc[Ashnm i IBJn Anjojm scheduled (o thz Iast 2 ceet Fron fircbne&lt; rxlalmed buidut tmaato {0 otr CaheIron Workethat Frinn m,get pUrned Thc conon - ncan cubic foot Kiln W4s Lcinplesu ontalns4OibaInto Kw mUN Makina czolble or olna tO cont OCTOBER 2 Jnilld Stjier Tiekiln hybid Pieces MUS dropa WOOD FIRI Tstriai matern&#x27; latcrthun ecptcmbc nq Tradirion: &quot;nintdicebnewoAindeun AlcnAnacum atchi;icmocnture wocdush umclco Lsuus Nbon Waadnuning erhate 4 4nnue E KifJ_ Kcao all1544mad
+29005 ALRONRD AlROR Vi49774
+MAci ANNE BETEF
+044 20-179
+DRNING O RECTICNSERDM1-94
+unqimtomal
+EEO
+Ren Squdbo Houn: Ereaty I0 0dim HilLomn
+GO SCUMH
+MICHIGANAME
+FCLLOWTHECUR ? RGhI OnTO Michsmnavc
+Turetea6e InthsEbofcs Alleunatatta EhatCdge HEctleenlec attoil funzce Dfn CEmnAEA Lnun in Anenn ITTAEnt o
+Ladiua SQuco Ins0Hulrn St Juie Bi Octmit Mldenca laoxbuadoulccamz
+Tuar [FFT oNC
+17 MIlf ROAD
+Iuaeeagghm Maenc CNIO ALHICNRoAD
+ROAD
+srane Auubunmuuuin] itwoi @tuhoba*rrdli- autrnlecurmu JIUInm
+Right Ino Midd DRNDNEY THE FLASLRGTELLOVUSHT
+(eenn
+man041
+Inc : WoodFucd Capmkc AbrnAnl)amx
+conmtmungDmtHG cinir nMnAY
+Ellm0eca</div>
+      <button class="post-expand" onclick="toggleText('d017ac4bb2e8')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_83120d62c8b0.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 04, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-fb29c1705bab">+2</div>
+      <div class="post-images">
+        <img src="extracted/images/img_b6b193940775.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 26, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_2eddebb2b702.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_005.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-83c76edaa8bd">We here at Albion Anagama would like to welcome the spring with Mother&#x27; $ Day Sale on May 1Oth 9.0Oam-7 OOpm. Besides great opportunity to get something special for Mom we will also have large selection of discounted items t0 make room for more pieces this summer:</div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 24, 2015</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-00136c569cef">FATHER&#x27;S DAY WEEKEND CERAMIC SALE
+Friday, June 17th: Spm 8pm Saturday, June 18th: 9am 6pm Sunday, June 19th: 9am-6pm
+UNIQUE. LOCAL:
+HAND-CRAFTED 
+Albion Anagama: 29005 Albion Road, Albion, Ml, 49224</div>
+      <div class="post-images">
+        <img src="extracted/images/img_de96b5c18ece.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 01, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_d4b0f4d93b8b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_005.jpg</span>
+        <span><span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-98684d0a8909">hanks to everyone who made it out to the sale: If you were unable to make it out last weekend we will have the display set up through X-mas So it is not too late to pick out one of kind holiday gifts.</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 20, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_35de83f9f4ee.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 25, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_de2f621723a1.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 21, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-e9f0ca3a88d0">MOTHERCDAY CALE
+UNIQUE LoCAL HANDCRAFTED MAY 2ND 3RD PLANTERC VASES SATURDAY &amp; SuNDAY pITcHERS 9.00 AM 5.00 pM BOWlS MUCS *SELECT PIECEC Albion ANAGAMA cups (5%-%50 OFF &amp; MORE 29005 AlBION RD_ ALBION,MI 49224</div>
+      <div class="post-images">
+        <img src="extracted/images/img_6d43904a6b9f.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_006.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text truncated" id="text-50c5b3c9a43c">Just wanted to send reminder about our holiday sale here at Albion Anagama: The firing produced many beautiful pieces_ Prices range from S10.00 and up and we open our doors at 9.0Oam this Saturday and Sunday: Hand crafted ceramics make wonderful holiday gifts! If you cant make it out this weekend we will be open everyday from 10.OOam to 7 OOpm: See more</div>
+      <button class="post-expand" onclick="toggleText('50c5b3c9a43c')">Show more</button>
+      <div class="post-indicators">
+        <span class="indicator">📄 Truncated (See more)</span>
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 18, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_b952084f6391.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_006.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-936d4ef1db6e">Ken Shenstone Ceramic Studio &amp; Albion Anagama added 29 new photos Albion, ML November 2013</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 17, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_3700eef09690.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_006.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-ad0cb019f270">Tracie Pond Jason Pond and visited last Saturday: Thank you for sharing this amazing process with the community. We truly enjoved our visit:</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 17, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_7e9f7610a83c.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">November 7, 2013</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-df5da80b72a6">Ken Shenstone Ceramic Studio &amp; Albion Anagama added new photo in Albion, MI: November 7, 2013</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 20, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_52f8e509d98c.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_007.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-0b7195ce54a8">Ken Shenstone Ceramic Studio &amp; Albion Anagama added 13 new photos Albion, ML; November 2013</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 20, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-cb2f500bb465">+3</div>
+      <div class="post-images">
+        <img src="extracted/images/img_1f7439d22e7a.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 14, 2014</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-35e62e8034dd">MOTHERCDAY CALE
+UNIQUE LOCAL HANDCRAFTED MAY 2ND 3RD PLANTERC VASES SATURDAY &amp; SuNDAY pITcHERS 9.00 AM 5.00 pM BOWlS MUCS *SELECT PIECES Albion AnaGAMA cups &amp; MORE (5%-%50 OFF 29005 AlBION RD AlBION,Mi 49224</div>
+      <div class="post-images">
+        <img src="extracted/images/img_e7e1ed4123e2.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-sale="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_007.jpg</span>
+        <span><span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-9cfdec6fbecd">Barry Lonik Looking forward to the sale on November 30!
+Like</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 19, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_452908332605.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 10, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-126b574e5d45">ABTo; DneRSH 6T OcALEt &gt;</div>
+      <div class="post-images">
+        <img src="extracted/images/img_f247d51434f1.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 18, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_ba0ca19b3c96.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-tag-event="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_008.jpg</span>
+        <span><span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text" id="text-17a45eae1b35">Sounds &amp; Sights Festival Is an annual summer weekend event in historic Chelsea, Michigan: The event started over three decades ago and is highlight of summer that draws visitors from all over the state and beyond.</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 01, 2014</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_37cceb48d175.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 16, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_37044feec9f3.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-sale="1" data-tag-wood="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_008.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-sale">💰 sale</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text" id="text-429a26fee040">Today is the first day of the Mother $ Day Sale and many new pieces from the NOBO wood kiln will be featured this weekend: Good people and Good beer at the Chelsea Ale House: Whats not to Ove?</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 05, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_dce8edbba19a.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 15, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_7a6c040058b6.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_8f1965a7598d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_009.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-ee00dea6e732">Barry Lonik Work work work; is that all you do? Don&#x27;t you ever go skiing?
+Like</div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 01, 2013</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-1dee37ec7bc8">Spring Cleaning Sale Saturday &amp; Sunday March 21st &amp; 22nd 9.OOam S.00pm
+15 50 % Off Most Items!
+Unique. Local: Handcrafted:
+Albion Anagama 29005 Albion Rd Albion Ml 49224
+(248)302-3795 albionanagama@gmail com</div>
+      <div class="post-images">
+        <img src="extracted/images/img_8a6eb56180ca.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_009.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-cfaa387b4de8">Chelsea Alehouse Opens Microbrewery to Beer Enthusiasts The Chelsea Alehouse officially opened on Jan: 3 and will offer variety of homemade beers and sandwiches</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 10, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-c1419e571ca2">+6</div>
+      <div class="post-images">
+        <img src="extracted/images/img_29533f3d96fd.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 30, 2013</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-77ee312be801">062
+HOLIDAY SALE KrMTEMBER 29TH-3OTH 8 DECEMRER 6TH- TTH
+O:OO AM-s:OO PM
+Functional &amp; Sculptural Ceramics
+UNIQUE: LOCAL:
+HANDCRAFTED.
+Albion Anagama 29005 Albion Rd: Albion, MI 49224</div>
+      <div class="post-images">
+        <img src="extracted/images/img_734a389bb876.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 02, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_88a79ed8d3e5.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 27, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_d098d0a97780.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 29, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_1173684ae1a9.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 18, 2015</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text truncated" id="text-6e820720ad08">October 2015 Albion Anagama 29005 Albion Rd. Albion; Ml 49224 looking Inlo . sloke hole ol Alblon Anogoma 2400 Degiees
+Sundoy
+Montoy
+Tuerday
+Madneidoy
+Inuncay
+Fiday
+Satdoy
+Losl dax lo pucnase Jpoce and ccn olt wok
+Beuin [caung Ina Anoqano
+Vsl Day Sea Inte anoqamo proces = loadng
+Dav: 500 Ihe anagamain Ine process &amp;t Jaouna
+VaH Day: 548 onagamian Doces0l boding
+&quot;LICHING @F ALBION ANAGAMA
+Vili Doy Scc int VR | 0a7; Set Anogomo Anagamo @uta J Fing curinpota Drocess pocos-
+&quot;Visit Doys: Get Jour of Ine studio and meet Ine &amp;rlists 0l wok If you want to see Ine studlo on non-visiil day YoU must cail andmake speckal appointment; For more Informatlon call Anne Beyer at (248|-302-3795 0f emoi al annekoeye 24@gmolcom:</div>
+      <button class="post-expand" onclick="toggleText('6e820720ad08')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_cbbc2937105e.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 07, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_e54725889c6d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 16, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_8c220a7bbf95.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 31, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_02370051ac69.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 14, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_16ba68ec2e09.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 21, 2013</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span></span>
+      </div>
+      <div class="post-text" id="text-6d5ca2ed979f">062
+HOLIDAY SALE KONTEMBER 29TH-3OTH 8 DECEMRER 6TH-TTH
+9:O0 AM-s:00 PM
+Functional &amp; Sculptural Ceramics
+UNIQUE: LOCAL
+HANDCRAFTED.
+Albion Anagama 29005 Albion Rd. Albion, MI 49224</div>
+      <div class="post-images">
+        <img src="extracted/images/img_d195301957ab.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 03, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-8d7fe64147f9">+3</div>
+      <div class="post-images">
+        <img src="extracted/images/img_fd455aca2b34.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_012.jpg</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-7c4b9493795f">Martha McCowin Woo hool Can&#x27;t wait to see what&#x27;t in itl
+13y Like</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_012.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-ddc6abc0c3a0">Ken Shenstone Ceramic Studio Albion Anagama Yes of coursel
+Like</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_012.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-3344425f214b">Next firing in Bobo the nobo will begin Friday the 27 th and finish Sunday the 29 th: This firing will include lots of running through the sprinkler and maybe horse trough to dip in. Anagama scheduled for Halloween:</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">May 02, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-402aa96f771b">comment
+share 8 views</div>
+      <div class="post-images">
+        <img src="extracted/images/img_820c026e7f67.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 29, 2013</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_a4011e8c808f.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-event="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb3_chunk_012.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text" id="text-0d89eaabd558">Tim Hollosy Awesome news, when is the Kiln show?
+Like</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">April 23, 2015</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_b7881b30de45.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="era-section" data-era="2009-2012">
+    <h2 class="era-header">2009–2012 <span class="count">(26 posts)</span></h2>
+
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">June 24, 2011</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-854270e67e07">+16</div>
+      <div class="post-images">
+        <img src="extracted/images/img_ee2dc815ed9c.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-tag-wood="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb4_chunk_000.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text" id="text-ba967964f9c5">ken shenstone artist profile Iam an artist whose clay work focuses almost exclusively on wood firing in an anagama style kiln;</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 10, 2010</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-99ed561cb450">+8</div>
+      <div class="post-images">
+        <img src="extracted/images/img_4d970720f784.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb4_chunk_001.jpg</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-41dcdfb4f1f0">Ken Shenstone Ceramic Studio &amp; Albion Anagama John here not really. look in to see what you all are doingl posted few pictures and stuff from previous firings, B .See more</div>
+      <div class="post-indicators">
+        <span class="indicator">📄 Truncated (See more)</span>
+      </div>
+    </div>
+    <div class="post-card" data-tag-event="1" data-has-text="1">
+      <div class="post-meta">
+        <span>fb4_chunk_001.jpg</span>
+        <span><span class="tag tag-event">🎪 event</span></span>
+      </div>
+      <div class="post-text" id="text-d8fb38c5b916">Joel Giguere Wish could be there for the big event:
+I5y Like</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-tag-pottery="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">May 15, 2009</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span></span>
+      </div>
+      <div class="post-text" id="text-f37c025b8197">Ken Shenstone Ceramic Studio &amp; Albion Anagama added 2 new photos with Ken Shenstone May 15, 2009</div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 26, 2010</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_56873eb9fe91.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 11, 2009</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-911bf7e73496">+9</div>
+      <div class="post-images">
+        <img src="extracted/images/img_65a85ca09515.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 17, 2009</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-19e5d7b85b7d">+34
+LiJc</div>
+      <div class="post-images">
+        <img src="extracted/images/img_72fcdd157a92.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">December 06, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-a9f5ab4caa55">+4</div>
+      <div class="post-images">
+        <img src="extracted/images/img_d9b8238ee8ab.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 25, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_a599779404b1.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 17, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_b7ae2566fe25.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_902d54384fe9.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 12, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-42a9fa7e886e">+2</div>
+      <div class="post-images">
+        <img src="extracted/images/img_0be0b6f8cdaf.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 11, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-d7f8090bc8c6">+9</div>
+      <div class="post-images">
+        <img src="extracted/images/img_9fe8495ee13d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 08, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-af4b28777f4b">+25</div>
+      <div class="post-images">
+        <img src="extracted/images/img_00a5032b2e13.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 07, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_2136e468b49e.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 01, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-e69e793a8bbf">+9</div>
+      <div class="post-images">
+        <img src="extracted/images/img_3058e7b5c093.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-sale" data-tag-kiln="1" data-tag-pottery="1" data-tag-sale="1" data-tag-wood="1" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">October 22, 2012</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span> <span class="tag tag-pottery">🏺 pottery</span> <span class="tag tag-sale">💰 sale</span> <span class="tag tag-wood">🪵 wood</span></span>
+      </div>
+      <div class="post-text truncated" id="text-2b1a34afa9cb">KeN ShENST ONe 29005 Albion RD AlBION Mi; 492ZY ALBION ANAGAMA Firing DAT ES: OCT OBER ZsTH - NOVEMBER 3RD
+DAT EsTo ViST k Open Hours: OCT OBEr Z6TH: IzDopM 70OpM Low T EMPERAT Ure NoveMbEr ZND: izoopM ToOpM HighT EMperaT Ure NoveMBEr 30t H % DECEMBER IST 90AM 50OpM CEraMIC SalE
+For MORE INFORMAT ION Vist www KENSHENST ONe(OM
+FOUOW US ON FACEBOOK:
+Ken ShensT ones Wood Fired CERAMIC ST Udio  AlBiON ANAGAMA</div>
+      <button class="post-expand" onclick="toggleText('2b1a34afa9cb')">Show more</button>
+      <div class="post-images">
+        <img src="extracted/images/img_f252b66f9ac3.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 13, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-27cac528a3aa">+6</div>
+      <div class="post-images">
+        <img src="extracted/images/img_772d6f541c05.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">September 03, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-e638fb4c2940">+132</div>
+      <div class="post-images">
+        <img src="extracted/images/img_211d80c68615.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">July 16, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-7c12e79ec65e">+34</div>
+      <div class="post-images">
+        <img src="extracted/images/img_73d0768c2047.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">March 02, 2012</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-dd28559f88e0">+61</div>
+      <div class="post-images">
+        <img src="extracted/images/img_135b56ec0a59.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">Nov 9, 2012</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-b8f0bb5e0622">Fri; Nov 9, 2012 Albion Anagama Firing 2012 Albion
+Interested</div>
+    </div>
+    <div class="post-card has-kiln" data-tag-kiln="1" data-has-text="1">
+      <div class="post-meta">
+        <span class="post-date">Nov 9 2012</span>
+        <span><span class="tag tag-kiln">🔥 kiln</span></span>
+      </div>
+      <div class="post-text" id="text-b64a1ccf2823">Fri, Nov 9 2012 Albion Anagama Firing 2012 Albion
+Interested</div>
+    </div>
+    <div class="post-card" data-has-text="1" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">November 08, 2011</span>
+        <span></span>
+      </div>
+      <div class="post-text" id="text-bb6789268d25">The Nobo reached desired temperature and will be opened on Saturdayl comment share</div>
+      <div class="post-images">
+        <img src="extracted/images/img_f55168c5d12d.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+    <div class="post-card" data-has-image="1">
+      <div class="post-meta">
+        <span class="post-date">August 11, 2011</span>
+        <span></span>
+      </div>
+      <div class="post-images">
+        <img src="extracted/images/img_0612774d3698.jpg" alt="Post image" loading="lazy">
+        <img src="extracted/images/img_49131e07494b.jpg" alt="Post image" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="source-note">
+    <strong>About this timeline:</strong> These posts were extracted from full-page screenshots of the
+    Ken Shenstone Ceramic Studio & Albion Anagama Facebook page, captured February 2026.
+    Text was extracted using EasyOCR. Some posts may contain OCR artifacts.
+    14 items have been flagged for additional content retrieval.
+    <br><br>
+    <em>5 screenshots → 58 chunks → 173 posts with content</em>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>Preserving the legacy of Ken Shenstone &amp; the Albion Anagama</p>
+  <p class="footer-sub">Albion, Michigan — Since 1987</p>
+</footer>
+
+<script>
+function filterPosts(filter) {
+  const cards = document.querySelectorAll('.post-card');
+  const buttons = document.querySelectorAll('.filter-bar button');
+  
+  buttons.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  cards.forEach(card => {
+    let show = false;
+    if (filter === 'all') {
+      show = true;
+    } else if (filter === 'has-text') {
+      show = card.dataset.hasText === '1';
+    } else if (filter === 'has-image') {
+      show = card.dataset.hasImage === '1';
+    } else {
+      show = card.dataset['tag' + filter.charAt(0).toUpperCase() + filter.slice(1)] === '1';
+    }
+    card.style.display = show ? '' : 'none';
+  });
+  
+  // Update era counts
+  document.querySelectorAll('.era-section').forEach(section => {
+    const visible = section.querySelectorAll('.post-card:not([style*="display: none"])').length;
+    const count = section.querySelector('.count');
+    if (count) count.textContent = '(' + visible + ' posts)';
+    section.style.display = visible > 0 ? '' : 'none';
+  });
+}
+
+function toggleText(id) {
+  const el = document.getElementById('text-' + id);
+  const btn = el.nextElementSibling;
+  if (el.classList.contains('truncated')) {
+    el.classList.remove('truncated');
+    btn.textContent = 'Show less';
+  } else {
+    el.classList.add('truncated');
+    btn.textContent = 'Show more';
+  }
+}
+</script>
+
+</body>
+</html>

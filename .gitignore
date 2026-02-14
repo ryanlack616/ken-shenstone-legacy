@@ -1,0 +1,15 @@
+# Intermediate pipeline data
+extracted/
+chunks/
+__pycache__/
+
+# Temp/debug files
+_*.py
+_*.txt
+_*.log
+debug_*.txt
+extraction_*.txt
+
+# OS
+Thumbs.db
+.DS_Store

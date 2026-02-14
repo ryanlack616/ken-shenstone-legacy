@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Ken Shenstone</title>
+<meta name="description" content="Wood-fired pottery by Ken Shenstone — teabowls, moon jars, scrolls, bud vases, lidded jars, and more. Each piece shaped by hand and finished by 10 days of fire.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .forms-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .form-card {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+  }
+  .form-card h4 { margin: 0 0 0.5rem 0; color: var(--heading); }
+  .form-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.6rem;
+    margin: 1.5rem 0;
+  }
+  .gallery-item {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--bg-warm);
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item .date-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0.4rem 0.6rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: #fff; font-size: 0.72rem;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .gallery-item:hover .date-label { opacity: 1; }
+  .era-section { margin-bottom: 2.5rem; }
+  .era-section h3 {
+    margin-bottom: 0.5rem; padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--accent); display: inline-block;
+  }
+  .lightbox {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.9); z-index: 1000;
+    align-items: center; justify-content: center; cursor: pointer;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 4px; }
+  .lightbox .close-btn {
+    position: absolute; top: 1rem; right: 1.5rem;
+    color: #fff; font-size: 2rem; cursor: pointer;
+    background: none; border: none; line-height: 1;
+  }
+  .lightbox .caption {
+    position: absolute; bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%); color: #ddd;
+    font-size: 0.85rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <div class="logo">Ken Shenstone <span class="accent">Legacy</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="kiln.html">The Kiln</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="studio.html">Studio Life</a>
+    <a href="timeline.html">Timeline</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<div class="page-header">
+  <h1>Work</h1>
+  <div class="page-desc">Each piece shaped by hand, finished by fire</div>
+</div>
+<main class="content">
+  <section>
+    <p>Ken's pottery is exclusively wood-fired in the Albion Anagama. No commercial glazes are applied — every surface, color, and texture comes from the interaction of flame, wood ash, and clay over 10 continuous days of firing. The placement of each piece within the 55-foot kiln determines its final character.</p>
+    <blockquote>Though not random, surfaces and even changes to the form are unpredictable. The best results are often unplanned.<cite>— Ken Shenstone</cite></blockquote>
+    <p>Prices range from as low as $8 to hundreds — Ken has always made his work accessible. Pieces are available at studio sales following each firing (typically autumn) and have been displayed year-round at the Chelsea Ale House and at the ClayHandi Restaurant in Kenmore.</p>
+  </section>
+  <hr class="divider">
+  <section>
+    <h2>Forms</h2>
+    <p>Ken worked in a range of traditional and inventive forms, each uniquely finished by 240 hours of fire and ash:</p>
+    <div class="forms-list">
+      <div class="form-card"><h4>Teabowls</h4><p>The <em>chawan</em> — the form most intimately connected to the Japanese wood-firing tradition. Each one unique, its surface determined entirely by its journey through fire and ash.</p></div>
+      <div class="form-card"><h4>Moon Jars</h4><p>Large, round vessels inspired by the Korean <em>dal hangari</em> — simple in form but transformed by the kiln's atmosphere into surfaces of remarkable complexity.</p></div>
+      <div class="form-card"><h4>Bud Vases</h4><p>Small, intimate forms designed to hold a single stem or small arrangement. The scale makes each ash-glazed surface a landscape in miniature.</p></div>
+      <div class="form-card"><h4>Flower Vases</h4><p>Larger vase forms, each one carrying distinct marks of flame path and ash deposit based on its position in the kiln.</p></div>
+      <div class="form-card"><h4>Lidded Jars</h4><p>Functional covered vessels — the lid and body fired together, their surfaces matched by shared placement yet individually marked by ash flow.</p></div>
+      <div class="form-card"><h4>Flip Top Bottles</h4><p>Bottles with hinged or flip-top closures — playful functional forms where Ken's woodworking skills complement his ceramic work.</p></div>
+      <div class="form-card"><h4>Scrolls</h4><p>Sculptural ceramic scrolls — forms referencing the Japanese aesthetic tradition while being entirely products of fire and earth.</p></div>
+      <div class="form-card"><h4>Peanut Vessels</h4><p>Organic, peanut-shaped vessels — rounded double forms that play with volume and the way ash glazes respond to concave and convex surfaces.</p></div>
+    </div>
+  </section>
+  <hr class="divider">
+  <section>
+    <h2>Gallery</h2>
+    <p>Images from Ken's Facebook page documenting pottery, firings, and studio life — spanning 2009 to 2020. Click any image to enlarge.</p>
+    <div class="era-section">
+      <h3>2018 – 2020</h3>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2020-02-26_page-profile.jpg" alt="Ken Shenstone Ceramic Studio profile" loading="lazy"><div class="date-label">February 26, 2020</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2019-05-01_ceramics.jpg" alt="Ceramics, May 2019" loading="lazy"><div class="date-label">May 1, 2019</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-09-09_ceramics.jpg" alt="Ceramics, September 2018" loading="lazy"><div class="date-label">September 9, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-09-08_ceramics.jpg" alt="Ceramics, September 2018" loading="lazy"><div class="date-label">September 8, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-06-19_ceramics.jpg" alt="Ceramics, June 2018" loading="lazy"><div class="date-label">June 19, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-05-12_ceramics_01.jpg" alt="Ceramics, May 2018" loading="lazy"><div class="date-label">May 12, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-05-07_ceramics.jpg" alt="Ceramics, May 2018" loading="lazy"><div class="date-label">May 7, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-05-02_ceramics_01.jpg" alt="Ceramics, May 2018" loading="lazy"><div class="date-label">May 2, 2018</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2018-01-23_ceramics.jpg" alt="Ceramics, January 2018" loading="lazy"><div class="date-label">January 23, 2018</div></div>
+      </div>
+    </div>
+    <div class="era-section">
+      <h3>2016 – 2017</h3>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2017-12-08_ceramics.jpg" alt="Ceramics, December 2017" loading="lazy"><div class="date-label">December 8, 2017</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2017-06-27_ceramics.jpg" alt="Ceramics, June 2017" loading="lazy"><div class="date-label">June 27, 2017</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-12-15_ceramics.jpg" alt="Ceramics, December 2016" loading="lazy"><div class="date-label">December 15, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-12-08_ceramics.jpg" alt="Ceramics, December 2016" loading="lazy"><div class="date-label">December 8, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-12-07_ceramics.jpg" alt="Ceramics, December 2016" loading="lazy"><div class="date-label">December 7, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-10-11_ceramics.jpg" alt="Ceramics, October 2016" loading="lazy"><div class="date-label">October 11, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-08-06_ceramics.jpg" alt="Ceramics, August 2016" loading="lazy"><div class="date-label">August 6, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-17_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 17, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-15_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 15, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-14_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 14, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-12_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 12, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-11_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 11, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-04_ceramics_01.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 4, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-03_ceramics_01.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 3, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-02_ceramics.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 2, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-07-01_ceramics_01.jpg" alt="Ceramics, July 2016" loading="lazy"><div class="date-label">July 1, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-29_ceramics.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 29, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-25_ceramics.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 25, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-19_ceramics.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 19, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-18_ceramics_01.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 18, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-17_ceramics_01.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 17, 2016</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2016-06-07_ceramics.jpg" alt="Ceramics, June 2016" loading="lazy"><div class="date-label">June 7, 2016</div></div>
+      </div>
+    </div>
+    <div class="era-section">
+      <h3>2014 – 2015</h3>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-12-19_ceramics.jpg" alt="Ceramics, December 2015" loading="lazy"><div class="date-label">December 19, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-12-12_ceramics.jpg" alt="Ceramics, December 2015" loading="lazy"><div class="date-label">December 12, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-11-01_ceramics.jpg" alt="Ceramics, November 2015" loading="lazy"><div class="date-label">November 1, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-31_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 31, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-30_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 30, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-29_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 29, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-26_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 26, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-20_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 20, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-18_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 18, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-10-17_ceramics.jpg" alt="Ceramics, October 2015" loading="lazy"><div class="date-label">October 17, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-20_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 20, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-19_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 19, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-18_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 18, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-16_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 16, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-15_ceramics_01.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 15, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-10_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 10, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-09-02_ceramics.jpg" alt="Ceramics, September 2015" loading="lazy"><div class="date-label">September 2, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-07-27_ceramics.jpg" alt="Ceramics, July 2015" loading="lazy"><div class="date-label">July 27, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-05-18_ceramics.jpg" alt="Ceramics, May 2015" loading="lazy"><div class="date-label">May 18, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-05-16_ceramics.jpg" alt="Ceramics, May 2015" loading="lazy"><div class="date-label">May 16, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-05-14_ceramics.jpg" alt="Ceramics, May 2015" loading="lazy"><div class="date-label">May 14, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-05-03_ceramics.jpg" alt="Ceramics, May 2015" loading="lazy"><div class="date-label">May 3, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-05-02_ceramics.jpg" alt="Ceramics, May 2015" loading="lazy"><div class="date-label">May 2, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-04-23_ceramics.jpg" alt="Ceramics, April 2015" loading="lazy"><div class="date-label">April 23, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-03-22_ceramics.jpg" alt="Ceramics, March 2015" loading="lazy"><div class="date-label">March 22, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-03-21_ceramics.jpg" alt="Ceramics, March 2015" loading="lazy"><div class="date-label">March 21, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2015-03-09_ceramics.jpg" alt="Ceramics, March 2015" loading="lazy"><div class="date-label">March 9, 2015</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-12-05_ceramics.jpg" alt="Ceramics, December 2014" loading="lazy"><div class="date-label">December 5, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-12-02_ceramics.jpg" alt="Ceramics, December 2014" loading="lazy"><div class="date-label">December 2, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-11-30_ceramics.jpg" alt="Ceramics, November 2014" loading="lazy"><div class="date-label">November 30, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-11-27_ceramics.jpg" alt="Ceramics, November 2014" loading="lazy"><div class="date-label">November 27, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-11-21_ceramics.jpg" alt="Ceramics, November 2014" loading="lazy"><div class="date-label">November 21, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-09-19_ceramics.jpg" alt="Ceramics, September 2014" loading="lazy"><div class="date-label">September 19, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-08-30_ceramics.jpg" alt="Ceramics, August 2014" loading="lazy"><div class="date-label">August 30, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-08-27_ceramics.jpg" alt="Ceramics, August 2014" loading="lazy"><div class="date-label">August 27, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-08-04_ceramics.jpg" alt="Ceramics, August 2014" loading="lazy"><div class="date-label">August 4, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-08-01_ceramics.jpg" alt="Ceramics, August 2014" loading="lazy"><div class="date-label">August 1, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-07-25_ceramics.jpg" alt="Ceramics, July 2014" loading="lazy"><div class="date-label">July 25, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-06-17_ceramics.jpg" alt="Ceramics, June 2014" loading="lazy"><div class="date-label">June 17, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-05-20_ceramics.jpg" alt="Ceramics, May 2014" loading="lazy"><div class="date-label">May 20, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-05-10_ceramics.jpg" alt="Ceramics, May 2014" loading="lazy"><div class="date-label">May 10, 2014</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2014-05-01_ceramics.jpg" alt="Ceramics, May 2014" loading="lazy"><div class="date-label">May 1, 2014</div></div>
+      </div>
+    </div>
+    <div class="era-section">
+      <h3>2012 – 2013</h3>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-12-05_ceramics.jpg" alt="Ceramics, December 2013" loading="lazy"><div class="date-label">December 5, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-11-29_ceramics.jpg" alt="Ceramics, November 2013" loading="lazy"><div class="date-label">November 29, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-11-07_ceramics.jpg" alt="Ceramics, November 2013" loading="lazy"><div class="date-label">November 7, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-10-31_ceramics.jpg" alt="Ceramics, October 2013" loading="lazy"><div class="date-label">October 31, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-09-29_ceramics.jpg" alt="Ceramics, September 2013" loading="lazy"><div class="date-label">September 29, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-07-25_ceramics.jpg" alt="Ceramics, July 2013" loading="lazy"><div class="date-label">July 25, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-05-06_ceramics.jpg" alt="Ceramics, May 2013" loading="lazy"><div class="date-label">May 6, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-05-04_ceramics_01.jpg" alt="Ceramics, May 2013" loading="lazy"><div class="date-label">May 4, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-03-19_ceramics.jpg" alt="Ceramics, March 2013" loading="lazy"><div class="date-label">March 19, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-02-04_ceramics.jpg" alt="Ceramics, February 2013" loading="lazy"><div class="date-label">February 4, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2013-01-07_ceramics.jpg" alt="Ceramics, January 2013" loading="lazy"><div class="date-label">January 7, 2013</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-12-06_ceramics.jpg" alt="Ceramics, December 2012" loading="lazy"><div class="date-label">December 6, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-25_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 25, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-17_ceramics_01.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 17, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-12_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 12, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-11_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 11, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-08_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 8, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-07_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 7, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-11-01_ceramics.jpg" alt="Ceramics, November 2012" loading="lazy"><div class="date-label">November 1, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-09-13_ceramics.jpg" alt="Ceramics, September 2012" loading="lazy"><div class="date-label">September 13, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-09-03_ceramics.jpg" alt="Ceramics, September 2012" loading="lazy"><div class="date-label">September 3, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-07-16_ceramics.jpg" alt="Ceramics, July 2012" loading="lazy"><div class="date-label">July 16, 2012</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2012-03-02_ceramics.jpg" alt="Ceramics, March 2012" loading="lazy"><div class="date-label">March 2, 2012</div></div>
+      </div>
+    </div>
+    <div class="era-section">
+      <h3>2009 – 2011</h3>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2011-11-08_noborigama.jpg" alt="Noborigama firing, November 2011" loading="lazy"><div class="date-label">November 8, 2011</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2011-08-11_ceramics_01.jpg" alt="Ceramics, August 2011" loading="lazy"><div class="date-label">August 11, 2011</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2011-06-24_ceramics.jpg" alt="Ceramics, June 2011" loading="lazy"><div class="date-label">June 24, 2011</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2010-10-10_ceramics.jpg" alt="Ceramics, October 2010" loading="lazy"><div class="date-label">October 10, 2010</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2010-09-26_ceramics.jpg" alt="Ceramics, September 2010" loading="lazy"><div class="date-label">September 26, 2010</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2009-11-11_ceramics.jpg" alt="Ceramics, November 2009" loading="lazy"><div class="date-label">November 11, 2009</div></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="organized_images/2009-07-17_ceramics.jpg" alt="Ceramics, July 2009" loading="lazy"><div class="date-label">July 17, 2009</div></div>
+      </div>
+    </div>
+  </section>
+  <hr class="divider">
+  <section>
+    <p style="text-align: center; color: var(--text-dim); font-style: italic; font-size: 0.9rem;">
+      Ken's original gallery pages on his Squarespace site — with individual photos of teabowls, moon jars, scrolls, and more — were not captured by web archives. The images above are from Ken's Facebook page and show pottery in context: fresh from the kiln, at studio sales, and in the studio.
+      <br>If you have photographs of Ken's individual pieces, we would welcome the chance to include them.
+      <br><a href="contact.html">Get in touch &rarr;</a>
+    </p>
+  </section>
+</main>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="close-btn" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <div class="caption"></div>
+</div>
+<footer class="site-footer">
+  <div class="legacy-note">This site preserves the legacy of Ken Shenstone and the Albion Anagama. Ken's original websites are no longer online — this project gathers what remains and presents it with the care it deserves.</div>
+  <div>29005 Albion Road, Albion, MI &middot; (517) 629-5876</div>
+  <div style="margin-top: 0.5rem;">
+    <a href="https://www.facebook.com/p/Ken-Shenstone-Ceramic-Studio-Albion-Anagama-100063487453130/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+<script>
+function openLightbox(el) {
+  var img = el.querySelector('img');
+  var caption = el.querySelector('.date-label');
+  var lb = document.getElementById('lightbox');
+  lb.querySelector('img').src = img.src;
+  lb.querySelector('img').alt = img.alt;
+  lb.querySelector('.caption').textContent = caption ? caption.textContent : '';
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  var lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>
